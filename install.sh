@@ -1,0 +1,3 @@
+RESTSERVERURL=$1
+
+sed -i "s/\$RESTSERVERURL/$RESTSERVERURL/g" src/nginx.conf 

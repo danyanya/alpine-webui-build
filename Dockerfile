@@ -1,14 +1,10 @@
-FROM mhart/alpine-node
+FROM danyanya/alpine-nginx
 
-RUN apk update && \
-    apk --no-cache add \
-        make \ 
-        gcc \
-        g++ \
-        python \
-        build-base
+COPY third_party/webui /webui
 
-RUN npm install -g yo gulp bower
-RUN npm install -g generator-gulp-angular
+ADD src/certs/* /etc/nginx/certs/
+ADD src/nginx.conf /etc/nginx/
 
-CMD ["sh"]
+EXPOSE 80 443
+
+CMD ["nginx", "-g", "daemon off;"]
